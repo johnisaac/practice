@@ -1,4 +1,4 @@
-class Stack
+class Queue
   attr_accessor :elements
   def initialize
     @elements = []
@@ -6,11 +6,12 @@ class Stack
   
   def push( item )
     @elements << item
+    @elements
   end
   
   def pop
-    item = @elements[@elements.length - 1]
-    @elements.delete_at( @elements.length - 1 )
+    item = @elements[0]
+    @elements.delete_at( 0 )
     item
   end
   

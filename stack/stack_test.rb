@@ -2,6 +2,7 @@ require 'test/unit'
 require './stack.rb'
 
 class StackTest < Test::Unit::TestCase
+  
   def setup
     @stack = Stack.new
   end
