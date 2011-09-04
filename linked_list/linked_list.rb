@@ -121,6 +121,40 @@ class LinkedList
     end
   end
   
+  def find_at_index( index )
+    return nil if index > @size
+    raise ArgumentError, "Invalid Index Number" unless index.class == Fixnum or Integer
+    
+    target = nil
+    i = 0
+    each do|item|
+      if i == index
+        target = item
+        break
+      end
+      i += 1
+    end
+    
+    target
+  end
+  
+  def delete_at( index )
+    return nil if index > @size
+    raise ArgumentError, "Invalid Index Number" unless index.class == Fixnum or Integer
+    
+    targetItem = find_at_index( index )
+    prevItem = targetItem.prev
+    nextItem = targetItem.ref
+    
+    prevItem.ref = nextItem
+    nextItem.prev = prevItem
+    
+    targetItem.ref = nil
+    targetItem.prev = nil
+    
+    @size -= 1
+  end
+  
   def previous
     @current.prev
   end

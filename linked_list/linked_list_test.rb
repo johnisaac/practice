@@ -124,4 +124,65 @@ class LinkedListTest < Test::Unit::TestCase
     assert_equal @ll.head, firstNode
     assert_equal @ll.tail, thirdNode 
   end
+  
+  def test_delete_an_index_should_be_an_integer
+    secondNode = Node.new({:datum => 1})
+    @ll.insertAfter( secondNode )
+
+    firstNode = Node.new({:datum => 0})
+    @ll.insertBefore( firstNode, secondNode )    
+    
+    thirdNode = Node.new({:datum => 2})
+    @ll.insertAfter( thirdNode, secondNode )
+    
+    assert_raise ArgumentError do
+      @ll.find_at_index( "insetter" )
+    end    
+  end
+  
+  def test_find_item_at_index
+    secondNode = Node.new({:datum => 1})
+    @ll.insertAfter( secondNode )
+
+    firstNode = Node.new({:datum => 0})
+    @ll.insertBefore( firstNode, secondNode )    
+    
+    thirdNode = Node.new({:datum => 2})
+    @ll.insertAfter( thirdNode, secondNode )
+    
+    item = @ll.find_at_index( 2 )
+    
+    assert_equal item, thirdNode
+  end
+  
+  def test_delete_an_index_should_be_an_integer
+    secondNode = Node.new({:datum => 1})
+    @ll.insertAfter( secondNode )
+
+    firstNode = Node.new({:datum => 0})
+    @ll.insertBefore( firstNode, secondNode )    
+    
+    thirdNode = Node.new({:datum => 2})
+    @ll.insertAfter( thirdNode, secondNode )
+    
+    assert_raise ArgumentError do
+      @ll.delete_at( "insetter" )
+    end    
+  end
+  
+  def test_delete_an_index_should_delete_an_item_at_the_index
+    secondNode = Node.new({:datum => 1})
+    @ll.insertAfter( secondNode )
+
+    firstNode = Node.new({:datum => 0})
+    @ll.insertBefore( firstNode, secondNode )    
+    
+    thirdNode = Node.new({:datum => 2})
+    @ll.insertAfter( thirdNode, secondNode ) 
+    
+    @ll.delete_at( 1 )
+    
+    assert_equal 2, @ll.size
+    assert_equal "0-->2", @ll.to_s
+  end
 end
